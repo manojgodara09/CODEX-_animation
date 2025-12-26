@@ -182,6 +182,52 @@ nav {
     100% { transform: translate(-10%, -10%) scale(1); }
 }
 
+/* Update .video-card to remove padding/centering if it exists */
+.video-card {
+    /* Keep existing styles, but ensure overflow is hidden */
+    overflow: hidden; 
+    position: relative;
+}
+
+.video-embed {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-bottom-color: var(--accent);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
 /* Expertise & Portfolio */
 .scroll-container { overflow: hidden; }
 .expertise-wrapper { width: 400%; height: 100vh; display: flex; flex-wrap: nowrap; }
