@@ -172,3 +172,72 @@ document.addEventListener("DOMContentLoaded", (event) => {
     gsap.to(".box-2", { scale: 1.5, yoyo: true, repeat: -1, duration: 1.5 });
     gsap.to(".box-3", { borderRadius: "50%", yoyo: true, repeat: -1, duration: 2 });
 });
+
+    // 9. 3D CAROUSEL LOGIC WITH YOUTUBE SUPPORT
+    const items = document.querySelectorAll('.video-item');
+    const totalItems = items.length;
+    let currentIndex = 2; // Start at center (Item 3)
+
+    function updateCarousel() {
+        if (window.innerWidth <= 768) return; // Disable 3D logic on mobile
+
+        items.forEach((item, index) => {
+            item.classList.remove('active');
+            
+            // Send PAUSE command to the YouTube iframe
+            const iframe = item.querySelector('iframe');
+            if (iframe) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
+
+            let offset = index - currentIndex;
+            if (offset > 2) offset -= totalItems;
+            if (offset < -2) offset += totalItems;
+
+            // Apply 3D Transforms
+            if (offset === 0) {
+                // Center (Active)
+                item.style.transform = 'translateX(0) translateZ(0) rotateY(0)';
+                item.style.zIndex = 10;
+                item.classList.add('active');
+                
+                // Send PLAY command to Center YouTube iframe
+                if (iframe) {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }
+            } else if (offset === 1) {
+                item.style.transform = 'translateX(220px) translateZ(-150px) rotateY(-30deg)';
+                item.style.zIndex = 5;
+            } else if (offset === -1) {
+                item.style.transform = 'translateX(-220px) translateZ(-150px) rotateY(30deg)';
+                item.style.zIndex = 5;
+            } else if (offset === 2 || offset === -3) {
+                item.style.transform = 'translateX(380px) translateZ(-300px) rotateY(-45deg)';
+                item.style.zIndex = 1;
+            } else if (offset === -2 || offset === 3) {
+                item.style.transform = 'translateX(-380px) translateZ(-300px) rotateY(45deg)';
+                item.style.zIndex = 1;
+            }
+        });
+    }
+
+    // Connect buttons to the function
+    window.moveCarousel = (direction) => {
+        currentIndex = (currentIndex + direction + totalItems) % totalItems;
+        updateCarousel();
+    };
+
+    // Initialize
+    if(items.length > 0) {
+        updateCarousel();
+        window.addEventListener('resize', () => {
+            if(window.innerWidth <= 768) {
+                items.forEach(item => {
+                    item.style.transform = '';
+                    // On mobile, maybe play all or let user scroll?
+                });
+            } else {
+                updateCarousel();
+            }
+        });
+    }

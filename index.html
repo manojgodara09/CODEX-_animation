@@ -50,6 +50,49 @@
         <p class="hero-sub">We create scroll-stopping animations designed to simplify complex stories.</p>
     </section>
 
+    <!-- Short Video Portfolio -->
+ <section class="portfolio" style="overflow: hidden;">
+        <h2 class="section-header">FEATURED WORK</h2>
+        
+        <div class="carousel-3d-container">
+            <div class="carousel-nav prev" onclick="moveCarousel(-1)">&#10094;</div>
+            <div class="carousel-nav next" onclick="moveCarousel(1)">&#10095;</div>
+            
+            <div class="carousel-3d">
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/C-yZlQXN3rQ?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&loop=1&playlist=C-yZlQXN3rQ" 
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+                </div>
+
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/bdG0jy2ogxg?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&loop=1&playlist=bdG0jy2ogxg" 
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+                </div>
+
+                <div class="video-item active">
+                    <iframe src="https://www.youtube.com/embed/Sfv5y_0UBpo?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&loop=1&playlist=Sfv5y_0UBpo" 
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+                </div>
+
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/C-yZlQXN3rQ?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&loop=1&playlist=C-yZlQXN3rQ" 
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+                </div>
+
+                <div class="video-item">
+                    <iframe src="https://www.youtube.com/embed/bdG0jy2ogxg?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&loop=1&playlist=bdG0jy2ogxg" 
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <!-- Horizontal Scroll Expertise -->
     <div class="scroll-container">
         <section class="expertise-wrapper">
@@ -75,44 +118,6 @@
             </div>
         </section>
     </div>
-
-    <!-- Short Video Portfolio -->
-  <section class="portfolio">
-        <h2 class="section-header">FEATURED SHORTS</h2>
-        <div class="video-grid">
-            
-            <div class="video-card tilt-card">
-                <iframe class="video-embed" 
-                    src="https://www.youtube.com/embed/C-yZlQXN3rQ?rel=0&modestbranding=1&loop=1&playlist=C-yZlQXN3rQ&vq=hd1080" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-
-            <div class="video-card tilt-card">
-                <iframe class="video-embed" 
-                    src="https://www.youtube.com/embed/bdG0jy2ogxg?rel=0&modestbranding=1&loop=1&playlist=bdG0jy2ogxg&vq=hd1080" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-
-            <div class="video-card tilt-card">
-                <iframe class="video-embed" 
-                    src="https://www.youtube.com/embed/Sfv5y_0UBpo?rel=0&modestbranding=1&loop=1&playlist=Sfv5y_0UBpo&vq=hd1080" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-
-        </div>
-    </section>
 
     <!-- Process Section -->
     <section class="process">
@@ -147,8 +152,8 @@
 <section class="register-section" style="padding: 8rem 2rem; text-align: center;">
         <h2 class="section-header">WORK WITH US</h2>
         
-        <form name="contact" method="POST" data-netlify="true" class="contact-form" netlify>
-             
+        <form name="contact" method="POST" data-netlify="true" action="/success.html" class="contact-form">
+            
             <input type="hidden" name="form-name" value="contact">
 
             <div class="form-group">
@@ -175,4 +180,3 @@
     <script src="index.js"></script>
 </body>
 </html>
-
