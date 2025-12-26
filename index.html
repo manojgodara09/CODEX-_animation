@@ -77,12 +77,40 @@
     </div>
 
     <!-- Short Video Portfolio -->
-    <section class="portfolio">
+  <section class="portfolio">
         <h2 class="section-header">FEATURED SHORTS</h2>
         <div class="video-grid">
-            <div class="video-card tilt-card"><div class="video-placeholder"><h3>▶</h3><p>CLIENT A</p></div></div>
-            <div class="video-card tilt-card"><div class="video-placeholder"><h3>▶</h3><p>CLIENT B</p></div></div>
-            <div class="video-card tilt-card"><div class="video-placeholder"><h3>▶</h3><p>CLIENT C</p></div></div>
+            
+            <div class="video-card tilt-card">
+                <iframe class="video-embed" 
+                    src="https://www.youtube.com/embed/C-yZlQXN3rQ?rel=0&modestbranding=1&loop=1&playlist=C-yZlQXN3rQ&vq=hd1080" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="video-card tilt-card">
+                <iframe class="video-embed" 
+                    src="https://www.youtube.com/embed/bdG0jy2ogxg?rel=0&modestbranding=1&loop=1&playlist=bdG0jy2ogxg&vq=hd1080" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="video-card tilt-card">
+                <iframe class="video-embed" 
+                    src="https://www.youtube.com/embed/Sfv5y_0UBpo?rel=0&modestbranding=1&loop=1&playlist=Sfv5y_0UBpo&vq=hd1080" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
         </div>
     </section>
 
@@ -116,8 +144,28 @@
     </section>
 
     <footer>
-        <h2>READY TO STAND OUT?</h2>
-        <button class="cta-btn magnetic">START PROJECT</button>
+<section class="register-section" style="padding: 8rem 2rem; text-align: center;">
+        <h2 class="section-header">WORK WITH US</h2>
+        
+        <form name="contact" method="POST" data-netlify="true" class="contact-form">
+            
+            <input type="hidden" name="form-name" value="contact">
+
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Your Email" required>
+            </div>
+            
+            <div class="form-group">
+                <textarea name="message" placeholder="Tell us about your project..." rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="cta-btn magnetic" style="margin-top: 2rem;">SEND REQUEST</button>
+        </form>
+    </section>
     </footer>
 
     <!-- Scripts -->
