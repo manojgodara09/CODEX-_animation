@@ -1,208 +1,365 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Codex Animation | Empowering Brands</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
+
+
     <!-- Cursor Ring -->
+
     <div class="cursor-ring"></div>
 
+
+
     <!-- FULL SCREEN MENU OVERLAY -->
+
     <div class="menu-overlay">
+
         <div class="menu-close-btn">CLOSE [X]</div>
+
         <div class="menu-links">
+
             <a href="#" class="menu-link">WORK</a>
+
             <a href="#" class="menu-link">SERVICES</a>
+
             <a href="#" class="menu-link">AGENCY</a>
+
             <a href="#" class="menu-link">CONTACT</a>
+
         </div>
+
         <div class="menu-footer">
+
             <span>Instagram</span>
+
             <span>LinkedIn</span>
+
             <span>YouTube</span>
+
         </div>
+
     </div>
+
+
 
     <!-- Navigation -->
+
     <nav>
+
         <div class="logo">CODEX.</div>
+
         <div class="menu-trigger magnetic">MENU</div>
+
     </nav>
 
+
+
     <!-- Hero Section (With Parallax) -->
+
     <section class="hero">
+
         <div class="blob"></div>
+
         <div class="hero-text-container" id="hero-container">
+
             <div class="hero-text">
+
                 <!-- Added 'reveal-text' class for JS -->
+
                 <div class="line-wrapper"><h1 class="reveal-text">EMPOWERING</h1></div>
+
                 <div class="line-wrapper"><h1 class="reveal-text">BRANDS THROUGH</h1></div>
+
                 <div class="line-wrapper"><h1 class="reveal-text outline">MOTION.</h1></div>
+
             </div>
+
         </div>
+
         <p class="hero-sub">We create scroll-stopping animations designed to simplify complex stories.</p>
+
     </section>
+
+
 
     <!-- Short Video Portfolio -->
+
  <section class="portfolio" style="overflow: hidden;">
+
         <h2 class="section-header">FEATURED WORK</h2>
+
         
-        <div class="carousel-3d">
-    <div class="video-item">
-        <iframe 
-            src="https://www.youtube.com/embed/snBR9l61Ges?enablejsapi=1&controls=0&rel=0&autoplay=1&playlist=snBR9l61Ges&loop=1&vq=hd1080" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
-        </iframe>
-        <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
-    </div>
 
-    <div class="video-item">
-        <iframe 
-            src="https://www.youtube.com/embed/6t__EG_C1E0?enablejsapi=1&controls=0&rel=0&autoplay=1&playlist=6t__EG_C1E0&loop=1&vq=hd1080" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
-        </iframe>
-        <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
-    </div>
+        <div class="carousel-3d-container">
 
-    <div class="video-item active">
-        <iframe 
-            src="https://www.youtube.com/embed/SeaNNPC3zEo?enablejsapi=1&controls=0&rel=0&autoplay=1&playlist=SeaNNPC3zEo&loop=1&vq=hd1080" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
-        </iframe>
-        <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
-    </div>
+            <div class="carousel-nav prev" onclick="moveCarousel(-1)">&#10094;</div>
 
-    <div class="video-item">
-        <iframe 
-            src="https://www.youtube.com/embed/1tyunD-HOuQ?enablejsapi=1&controls=0&rel=0&autoplay=1&playlist=1tyunD-HOuQ&loop=1&vq=hd1080" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
-        </iframe>
-        <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
-    </div>
+            <div class="carousel-nav next" onclick="moveCarousel(1)">&#10095;</div>
 
-    <div class="video-item">
-        <iframe 
-            src="https://www.youtube.com/embed/Zsh1XKDbYoA?enablejsapi=1&controls=0&rel=0&autoplay=1&playlist=Zsh1XKDbYoA&loop=1&vq=hd1080" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
-        </iframe>
-        <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
-    </div>
-</div>
+            
+
+            <div class="carousel-3d">
+
+                <div class="video-item">
+
+                    <iframe src="https://www.youtube.com/embed/snBR9l61Ges?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
+
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+
+                </div>
+
+
+
+                <div class="video-item">
+
+                    <iframe src="https://www.youtube.com/embed/6t__EG_C1E0?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
+
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+
+                </div>
+
+
+
+                <div class="video-item active">
+
+                    <iframe src="https://www.youtube.com/embed/SeaNNPC3zEo?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
+
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+
+                </div>
+
+
+
+                <div class="video-item">
+
+                    <iframe src="https://www.youtube.com/embed/1tyunD-HOuQ?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
+
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+
+                </div>
+
+
+
+                <div class="video-item">
+
+                    <iframe src="https://www.youtube.com/embed/Zsh1XKDbYoA?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
+
+                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </section>
+
+
+
 
 
     <!-- Horizontal Scroll Expertise -->
+
     <div class="scroll-container">
+
         <section class="expertise-wrapper">
+
             <div class="expertise-panel">
+
                 <h2 class="panel-title">THE AGENCY</h2>
+
                 <p class="panel-desc">Codex Animation is focused on crafting high-impact videos that simplify complexity, educate audiences, and elevate your brand.</p>
+
                 <div class="panel-num">00</div>
+
             </div>
+
             <div class="expertise-panel">
+
                 <h2 class="panel-title">STRATEGY</h2>
+
                 <p class="panel-desc">We define a creative direction aligned with your brand. We don't just execute; we take the creative lead.</p>
+
                 <div class="panel-num">01</div>
+
             </div>
+
             <div class="expertise-panel">
+
                 <h2 class="panel-title">MOTION</h2>
+
                 <p class="panel-desc">Smooth transitions, dynamic motion, and visuals specifically tailored to your brand.</p>
+
                 <div class="panel-num">02</div>
+
             </div>
+
             <div class="expertise-panel">
+
                 <h2 class="panel-title">OPTIMIZATION</h2>
+
                 <p class="panel-desc">Final assets ready for distribution. Designed short-form videos optimized for social media.</p>
+
                 <div class="panel-num">03</div>
+
             </div>
+
         </section>
+
     </div>
 
+
+
     <!-- Process Section -->
+
     <section class="process">
+
         <h2 class="section-header">THE PROCESS</h2>
+
         <div class="step">
+
             <div class="step-content">
+
                 <span class="step-num">PHASE 1</span>
+
                 <h3>CONCEPT</h3>
+
                 <p>Defining a creative direction aligned with your brand, audience, and goals.</p>
+
             </div>
+
             <div class="step-visual"><div class="visual-box box-1"></div></div>
+
         </div>
+
         <div class="step reverse">
+
             <div class="step-content">
+
                 <span class="step-num">PHASE 2</span>
+
                 <h3>DESIGN</h3>
+
                 <p>Creating clear and engaging visuals that structure your message.</p>
+
             </div>
+
             <div class="step-visual"><div class="visual-box box-2"></div></div>
+
         </div>
+
         <div class="step">
+
             <div class="step-content">
+
                 <span class="step-num">PHASE 3</span>
+
                 <h3>ANIMATION</h3>
+
                 <p>Bringing your ideas to life with smooth transitions and dynamic motion.</p>
+
             </div>
+
             <div class="step-visual"><div class="visual-box box-3"></div></div>
+
         </div>
+
     </section>
+
+
 
     <footer>
+
 <section class="register-section" style="padding: 8rem 2rem; text-align: center;">
+
         <h2 class="section-header">WORK WITH US</h2>
+
         
+
         <form name="contact" method="POST" data-netlify="true" action="/success.html" class="contact-form" netlify>
+
             
+
             <input type="hidden" name="form-name" value="contact">
 
+
+
             <div class="form-group">
+
                 <input type="text" name="name" placeholder="Your Name" required>
+
             </div>
+
             
+
             <div class="form-group">
+
                 <input type="email" name="email" placeholder="Your Email" required>
+
             </div>
+
             
+
             <div class="form-group">
+
                 <textarea name="message" placeholder="Tell us about your project..." rows="4" required></textarea>
+
             </div>
+
+
 
             <button type="submit" class="cta-btn magnetic" style="margin-top: 2rem;">SEND REQUEST</button>
+
         </form>
+
     </section>
+
     </footer>
 
+
+
     <!-- Scripts -->
+
     <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+
     <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+
     <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+
     <script src="index.js"></script>
+
 </body>
 
+
+
 </html>
-
-
-
-
-
