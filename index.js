@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         gsap.registerPlugin(ScrollTrigger);
     }
 
-    // 1. Initialize Smooth Scroll (Lenis)
+    // 1. SMOOTH SCROLL (LENIS)
     try {
         if (typeof Lenis !== 'undefined') {
             const lenis = new Lenis({
@@ -37,51 +37,107 @@ document.addEventListener("DOMContentLoaded", (event) => {
             menuOverlay.classList.add('active');
             menuTl.play();
         });
-        menuClose.addEventListener('click', () => {
+
+        const closeMenu = () => {
             menuOverlay.classList.remove('active');
             menuTl.reverse();
-        });
+        };
+
+        menuClose.addEventListener('click', closeMenu);
+        menuLinks.forEach(link => link.addEventListener('click', closeMenu));
     }
 
-    // 3. HERO ANIMATION (The Fix)
-    // We animate FROM the glitch state TO the clean state.
-    // This ensures the final result is always readable.
+    // 3. HERO TEXT REVEAL
     const tl = gsap.timeline();
-    
     tl.from(".reveal-text", {
-        y: 100,           // Comes from below
-        skewY: 7,         // Slight skew for style
-        opacity: 0,       // Starts invisible
-        filter: "blur(10px)", // Starts blurry
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "power4.out"
+        y: 100, skewY: 7, opacity: 0, filter: "blur(10px)",
+        duration: 1.5, stagger: 0.2, ease: "power4.out"
     })
-    .to(".hero-sub", {
-        opacity: 1,
-        duration: 1,
-        ease: "power2.out"
-    }, "-=1");
+    .to(".hero-sub", { opacity: 1, duration: 1, ease: "power2.out" }, "-=1");
 
-    // 4. HERO PARALLAX (Subtle Mouse Move)
-    const heroContainer = document.querySelector('.hero-text-container');
-    if(heroContainer) {
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 10; // Reduced movement range
-            const y = (e.clientY / window.innerHeight - 0.5) * 10;
+    // =========================================
+    // 4. 3D SCROLL SEQUENCE (FIXED QUALITY)
+    // =========================================
+    const canvas = document.getElementById("hero-lightpass");
+    
+    if (canvas) {
+        const context = canvas.getContext("2d");
 
-            gsap.to(heroContainer, {
-                x: -x,
-                y: -y,
-                rotateX: -y * 0.2, // Very subtle tilt
-                rotateY: x * 0.2,
-                duration: 1,
-                ease: "power2.out"
-            });
+        // --- UPDATE THIS TO YOUR EXACT FRAME COUNT ---
+        const frameCount = 200; 
+        
+        const currentFrame = index => (
+            `./assets/hero/ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`
+        );
+
+        const images = [];
+        const sequence = { frame: 0 };
+
+        // Preload
+        for (let i = 0; i < frameCount; i++) {
+          const img = new Image();
+          img.src = currentFrame(i);
+          images.push(img);
+        }
+
+        gsap.to(sequence, {
+          frame: frameCount - 1,
+          snap: "frame",
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "+=4000", 
+            scrub: 0.5,        
+            pin: true,
+          },
+          onUpdate: render 
         });
+
+        images[0].onload = render;
+
+        function render() {
+          // FIXED: Clear the canvas based on its actual size
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          const img = images[sequence.frame];
+          
+          if (img) {
+              const hRatio = canvas.width / img.width;
+              const vRatio = canvas.height / img.height;
+              
+              // Zoom in 10% to hide logo
+              const ratio = Math.max(hRatio, vRatio) * 1.1; 
+              
+              const centerShift_x = (canvas.width - img.width * ratio) / 2;
+              const centerShift_y = (canvas.height - img.height * ratio) / 2;
+              
+              context.drawImage(img, 0, 0, img.width, img.height, centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+          }
+        }
+
+        // FIXED: HIGH QUALITY RESIZE (For Mobile/Retina)
+        const updateCanvasSize = () => {
+            const dpr = window.devicePixelRatio || 1; // Get phone pixel density
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            
+            // Ensure the canvas is scaled back down with CSS
+            canvas.style.width = window.innerWidth + "px";
+            canvas.style.height = window.innerHeight + "px";
+
+            // Reset scale so drawImage works correctly
+            context.scale(1, 1); 
+            // Important: We don't scale context here because we want raw pixels for quality, 
+            // but we rely on the math in render() to fill the new width.
+            
+            render();
+        };
+
+        updateCanvasSize();
+        window.addEventListener("resize", updateCanvasSize);
     }
 
-    // 5. RESPONSIVE SCROLL LOGIC
+    // 5. RESPONSIVE HORIZONTAL SCROLL
     ScrollTrigger.matchMedia({
         "(min-width: 800px)": function() {
             const sections = gsap.utils.toArray(".expertise-panel");
@@ -108,43 +164,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         start: "top 85%",
                         toggleActions: "play none none reverse"
                     },
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: "power3.out"
+                    y: 50, opacity: 0, duration: 0.8, ease: "power3.out"
                 });
             });
         }
     });
 
-    // 6. 3D TILT EFFECT
-    const cards = document.querySelectorAll('.tilt-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -10;
-            const rotateY = ((x - centerX) / centerX) * 10;
-
-            gsap.to(card, {
-                transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`,
-                duration: 0.1,
-                ease: "power1.out"
-            });
-        });
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                transform: `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`,
-                duration: 0.5,
-                ease: "power3.out"
-            });
-        });
-    });
-
-    // 7. MAGNETIC BUTTONS
+    // 6. MAGNETIC BUTTONS
     const magnets = document.querySelectorAll('.magnetic');
     magnets.forEach(magnet => {
         magnet.addEventListener('mousemove', (e) => {
@@ -158,7 +184,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 
-    // 8. CURSOR RING
+    // 7. CURSOR RING (Optional - Add back if needed)
     const cursorRing = document.querySelector('.cursor-ring');
     if(cursorRing) {
         document.addEventListener('mousemove', (e) => {
@@ -167,44 +193,35 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    // Visual Rotations
+    // =========================================
+    // 8. FIXED: THE PROCESS ANIMATIONS (RESTORED)
+    // =========================================
     gsap.to(".box-1", { rotation: 360, duration: 3, repeat: -1, ease: "linear" });
     gsap.to(".box-2", { scale: 1.5, yoyo: true, repeat: -1, duration: 1.5 });
     gsap.to(".box-3", { borderRadius: "50%", yoyo: true, repeat: -1, duration: 2 });
-});
 
-    // 9. 3D CAROUSEL LOGIC WITH YOUTUBE SUPPORT
+    // 9. 3D CAROUSEL LOGIC
     const items = document.querySelectorAll('.video-item');
     const totalItems = items.length;
-    let currentIndex = 2; // Start at center (Item 3)
+    let currentIndex = 2; 
 
     function updateCarousel() {
-        if (window.innerWidth <= 768) return; // Disable 3D logic on mobile
+        if (window.innerWidth <= 768) return; 
 
         items.forEach((item, index) => {
             item.classList.remove('active');
-            
-            // Send PAUSE command to the YouTube iframe
             const iframe = item.querySelector('iframe');
-            if (iframe) {
-                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-            }
+            if (iframe) iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
 
             let offset = index - currentIndex;
             if (offset > 2) offset -= totalItems;
             if (offset < -2) offset += totalItems;
 
-            // Apply 3D Transforms
             if (offset === 0) {
-                // Center (Active)
                 item.style.transform = 'translateX(0) translateZ(0) rotateY(0)';
                 item.style.zIndex = 10;
                 item.classList.add('active');
-                
-                // Send PLAY command to Center YouTube iframe
-                if (iframe) {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                }
+                if (iframe) iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
             } else if (offset === 1) {
                 item.style.transform = 'translateX(220px) translateZ(-150px) rotateY(-30deg)';
                 item.style.zIndex = 5;
@@ -221,23 +238,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    // Connect buttons to the function
     window.moveCarousel = (direction) => {
         currentIndex = (currentIndex + direction + totalItems) % totalItems;
         updateCarousel();
     };
 
-    // Initialize
     if(items.length > 0) {
         updateCarousel();
         window.addEventListener('resize', () => {
             if(window.innerWidth <= 768) {
-                items.forEach(item => {
-                    item.style.transform = '';
-                    // On mobile, maybe play all or let user scroll?
-                });
+                items.forEach(item => item.style.transform = '');
             } else {
                 updateCarousel();
             }
         });
     }
+});

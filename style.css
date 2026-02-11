@@ -17,151 +17,70 @@ body {
 
 /* --- MENU OVERLAY --- */
 .menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #000;
-    z-index: 10000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: #000; z-index: 10000;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
 }
-
-.menu-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-}
-
+.menu-overlay.active { opacity: 1; pointer-events: all; }
 .menu-close-btn {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 0.8rem 1.5rem;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50px;
-    transition: background 0.3s;
-    background: rgba(0,0,0,0.8);
-    z-index: 10001;
+    position: absolute; top: 2rem; right: 2rem;
+    font-family: 'Syne', sans-serif; font-weight: 700; cursor: pointer;
+    font-size: 1rem; padding: 0.8rem 1.5rem; border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px; transition: background 0.3s; background: rgba(0,0,0,0.8); z-index: 10001;
 }
 .menu-close-btn:hover { background: white; color: black; }
-
 .menu-links { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-
 .menu-link {
-    font-family: 'Syne', sans-serif;
-    font-size: 3rem;
-    font-weight: 800;
-    color: transparent;
-    -webkit-text-stroke: 1px #555;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.3s;
-    opacity: 0;
-    transform: translateY(50px);
+    font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: transparent;
+    -webkit-text-stroke: 1px #555; text-decoration: none; text-transform: uppercase;
+    transition: all 0.3s; opacity: 0; transform: translateY(50px);
 }
-
-.menu-link:hover {
-    color: white;
-    -webkit-text-stroke: 0px;
-    transform: scale(1.05);
-}
-
+.menu-link:hover { color: white; -webkit-text-stroke: 0px; transform: scale(1.05); }
 .menu-footer { position: absolute; bottom: 3rem; display: flex; gap: 1.5rem; color: #666; font-size: 0.9rem; }
 
-/* --- HERO SECTION (STRICT FIT) --- */
+/* --- HERO SECTION (FIXED & RESPONSIVE) --- */
 .hero {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    perspective: 1000px;
-    padding: 0 1rem;
+    height: 100vh; width: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    position: relative; overflow: hidden; background: #000;
+}
+
+/* The Canvas that plays the video */
+canvas#hero-lightpass {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 1;
+}
+
+/* The Dark Gradient to make text readable */
+.hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%);
+    z-index: 2; pointer-events: none;
 }
 
 .hero-text-container {
-    z-index: 2;
-    width: 100%;
-    /* Ensure container never exceeds screen width */
-    max-width: 100vw; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    z-index: 10; position: relative; width: 100%; max-width: 100vw;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
 
 .hero-text {
-    text-align: center;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    width: 100%;
-    
-    /* 
-       THE FIX:
-       We use 'clamp' to set strict boundaries.
-       Desktop: 3.5vw (Safe for 14 chars).
-       Max Size: 4.5rem (Prevents it from getting huge).
-    */
-    font-size: clamp(1.5rem, 3.5vw, 4.5rem);
-    
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    
-    /* Safety: If text is still too wide, break it */
-    word-wrap: break-word;
-    max-width: 90vw; 
+    text-align: center; font-family: 'Syne', sans-serif; font-weight: 800;
+    width: 100%; font-size: clamp(2rem, 5vw, 6rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    text-shadow: 0 10px 30px rgba(0,0,0,1); /* Shadow for readability */
 }
 
-.line-wrapper { 
-    overflow: hidden; 
-    padding: 5px 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.reveal-text {
-    display: block;
-    opacity: 1; 
-    /* Allow wrapping on very small screens if absolutely necessary */
-    white-space: normal; 
-}
-
+.reveal-text { display: block; opacity: 1; }
 .outline { color: transparent; -webkit-text-stroke: 1px white; }
 
-.hero-sub { 
-    margin-top: 2rem; 
-    font-size: 1rem; 
-    max-width: 600px; 
-    text-align: center; 
-    color: #aaa; 
-    opacity: 0; 
-    line-height: 1.5;
-    padding: 0 1rem;
+.hero-sub {
+    margin-top: 2rem; font-size: 1.1rem; max-width: 600px; text-align: center;
+    color: #ddd; opacity: 0; line-height: 1.5; padding: 0 1rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,1);
 }
 
-/* --- REST OF SITE --- */
-.cursor-ring {
-    position: fixed; width: 40px; height: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%; pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s;
-    mix-blend-mode: difference;
-}
-
+/* --- UI ELEMENTS --- */
 nav {
     position: fixed; top: 0; width: 100%; padding: 1.5rem 2rem;
     display: flex; justify-content: space-between; align-items: center;
@@ -169,196 +88,46 @@ nav {
 }
 .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; }
 .menu-trigger { font-weight: 700; cursor: pointer; padding: 8px 16px; border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; font-size: 0.9rem; }
-
-.blob {
-    position: absolute; width: 80vw; height: 80vw;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-    filter: blur(80px); opacity: 0.3; z-index: 0;
-    animation: float 10s infinite ease-in-out;
-}
-@keyframes float {
-    0% { transform: translate(-10%, -10%) scale(1); }
-    50% { transform: translate(10%, 10%) scale(1.1); }
-    100% { transform: translate(-10%, -10%) scale(1); }
+.cursor-ring {
+    position: fixed; width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s;
+    mix-blend-mode: difference;
 }
 
-/* Update .video-card to remove padding/centering if it exists */
-.video-card {
-    /* Keep existing styles, but ensure overflow is hidden */
-    overflow: hidden; 
-    position: relative;
-}
+/* --- 3D CAROUSEL --- */
+.portfolio { padding: 8rem 2rem; background: #050505; overflow: hidden; }
+.section-header { font-size: 3rem; margin-bottom: 3rem; text-align: center; }
 
-.video-embed {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-}
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.form-group input, 
-.form-group textarea {
-    width: 100%;
-    padding: 1rem;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus, 
-.form-group textarea:focus {
-    border-bottom-color: var(--accent);
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-/* =========================================
-   3D CAROUSEL STYLES
-   ========================================= */
 .carousel-3d-container {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    height: 600px;
-    margin: 0 auto 50px;
-    perspective: 1500px;
+    position: relative; width: 100%; max-width: 1200px; height: 600px; margin: 0 auto; perspective: 1500px;
 }
-
-.carousel-3d {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-}
-
+.carousel-3d { position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; }
 .video-item {
-    position: absolute;
-    width: 300px;
-    height: 533px; /* 9:16 Vertical Ratio */
-    left: 50%;
-    top: 50%;
-    margin-left: -150px;
-    margin-top: -266.5px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    background: #000;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: absolute; width: 300px; height: 533px; left: 50%; top: 50%;
+    margin-left: -150px; margin-top: -266.5px; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    background: #000; border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-.video-item iframe {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: auto; /* Allows clicking YouTube controls if needed */
-}
-
-/* Dark overlay to focus on the center video */
+.video-item iframe { width: 100%; height: 100%; object-fit: cover; pointer-events: auto; }
 .video-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex; justify-content: center; align-items: center;
-    transition: opacity 0.4s;
-    pointer-events: auto; /* Blocks clicks on side videos */
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7);
+    display: flex; justify-content: center; align-items: center; transition: opacity 0.4s; pointer-events: auto;
 }
-.video-item.active .video-overlay { 
-    opacity: 0; 
-    pointer-events: none; /* Allows clicks on the center video */
-}
+.video-item.active .video-overlay { opacity: 0; pointer-events: none; }
+.play-icon { font-size: 30px; color: white; width: 60px; height: 60px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
 
-.play-icon {
-    font-size: 30px; color: white;
-    width: 60px; height: 60px;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 50%;
-    display: flex; justify-content: center; align-items: center;
-    backdrop-filter: blur(5px);
-}
-
-/* Navigation Buttons */
 .carousel-nav {
-    position: absolute; top: 50%;
-    transform: translateY(-50%);
-    width: 50px; height: 50px;
-    background: linear-gradient(135deg, var(--accent, #7c3aed), #3b82f6);
-    border-radius: 50%;
-    display: flex; justify-content: center; align-items: center;
-    cursor: pointer; z-index: 20;
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
-    transition: transform 0.3s;
+    position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px;
+    background: linear-gradient(135deg, var(--accent, #7c3aed), #3b82f6); border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 20;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5); transition: transform 0.3s;
 }
 .carousel-nav:hover { transform: translateY(-50%) scale(1.1); }
 .carousel-nav.prev { left: 20px; }
 .carousel-nav.next { right: 20px; }
 
-/* MOBILE OPTIMIZATION */
-@media (max-width: 768px) {
-    .carousel-3d-container {
-        height: auto;
-        perspective: none;
-        overflow: visible;
-        margin-bottom: 3rem;
-    }
-    .carousel-3d {
-        position: static;
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 20px;
-        padding-bottom: 2rem;
-        scrollbar-width: none; 
-    }
-    .carousel-3d::-webkit-scrollbar { display: none; }
-
-    .video-item {
-        position: static;
-        margin: 0;
-        flex-shrink: 0;
-        width: 80vw;
-        height: 142vw;
-        scroll-snap-align: center;
-        transform: none !important;
-    }
-    .carousel-nav, .video-overlay { display: none; }
-}
-
-/* SUCCESS PAGE STYLES */
-.success-wrapper {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #050505;
-}
-.submission-box {
-    background: #080808;
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 3rem;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 400px;
-    margin: 1rem;
-}
-
-/* Expertise & Portfolio */
+/* --- EXPERTISE (HORIZONTAL SCROLL) --- */
 .scroll-container { overflow: hidden; }
 .expertise-wrapper { width: 400%; height: 100vh; display: flex; flex-wrap: nowrap; }
 .expertise-panel { width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10vw; border-right: 1px solid rgba(255,255,255,0.1); position: relative; }
@@ -366,13 +135,7 @@ nav {
 .panel-desc { font-size: 1.5rem; max-width: 600px; line-height: 1.6; }
 .panel-num { font-size: 15rem; position: absolute; bottom: -5rem; right: 0; opacity: 0.05; font-weight: 800; }
 
-.portfolio { padding: 8rem 2rem; background: #080808; }
-.section-header { font-size: 3rem; margin-bottom: 3rem; text-align: center; }
-.video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1400px; margin: 0 auto; }
-.video-card { aspect-ratio: 9 / 16; background: #151515; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.1s; }
-.video-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #555; }
-
-/* Process */
+/* --- PROCESS --- */
 .process { padding: 8rem 2rem; }
 .step { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8rem; }
 .step.reverse { flex-direction: row-reverse; }
@@ -383,40 +146,88 @@ nav {
 .step-visual { width: 45%; height: 300px; background: rgba(255,255,255,0.05); border-radius: 20px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1); }
 .visual-box { width: 100px; height: 100px; background: var(--accent); }
 
-footer { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #000; text-align: center; padding: 0 1rem; }
+/* --- FOOTER & FORM --- */
+footer { min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #000; text-align: center; padding: 4rem 1rem; }
+.contact-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; width: 100%; }
+.form-group input, .form-group textarea {
+    width: 100%; padding: 1rem; background: transparent; border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); color: white;
+    font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; outline: none; transition: border-color 0.3s;
+}
+.form-group input:focus, .form-group textarea:focus { border-bottom-color: var(--accent); }
 .cta-btn { padding: 1.2rem 2.5rem; font-size: 1.2rem; background: white; color: black; border: none; border-radius: 50px; cursor: pointer; font-family: 'Syne', sans-serif; font-weight: 700; }
 
 /* =========================================
-   MOBILE OPTIMIZATION (STRICT)
+   MOBILE RESPONSIVENESS (FIXED)
    ========================================= */
 @media (max-width: 768px) {
+    /* Hide custom cursor on touch */
     .cursor-ring { display: none; }
-    nav { padding: 1.5rem 1rem; }
     
-    /* 
-       MOBILE HERO FIX:
-       We use 5vw. This is small.
-       But it guarantees "BRANDS THROUGH" fits on a vertical screen.
-    */
-    .hero-text { 
-        font-size: 5vw; 
-        max-width: 95vw;
+    /* Nav adjustments */
+    nav { padding: 1rem; }
+    /* FIXED: Mobile Hero Text Sizing */
+    .hero-text-container {
+        padding: 0 10px; /* Add breathing room on sides */
     }
-    
-    .hero-sub { font-size: 0.9rem; width: 100%; padding: 0 1rem; margin-top: 1.5rem; }
 
-    /* Adjust other large text */
-    .panel-title { font-size: 2rem; }
-    .panel-desc { font-size: 1rem; }
-    .section-header { font-size: 2rem; }
-    .menu-link { font-size: 2.5rem; }
+    .hero-text { 
+        /* Use 'vw' so it scales with screen width */
+        font-size: 4vw;  
+        line-height: 1.1;
+        
+        /* Force text to wrap if it's still too long */
+     
+ 
+        hyphens: auto;
+    } 
 
-    /* Stack Layouts */
-    .expertise-wrapper { width: 100%; height: auto; flex-direction: column; display: block; }
-    .expertise-panel { width: 100%; height: auto; min-height: 60vh; padding: 3rem 1rem; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .hero-sub { 
+        font-size: 0.9rem; 
+        margin-top: 1rem; 
+        max-width: 90%; /* Prevent subtitle from touching edges */
+    }
+    /* Hero Text Sizing */
     
+    /* Disable Horizontal Scroll on Mobile (It breaks UX) */
+    .expertise-wrapper { 
+        width: 100%; height: auto; 
+        flex-direction: column; 
+        display: block; 
+    }
+    .expertise-panel { 
+        width: 100%; height: auto; 
+        min-height: 50vh; 
+        padding: 4rem 1.5rem; 
+        border-right: none; 
+        border-bottom: 1px solid rgba(255,255,255,0.1); 
+    }
+    .panel-title { font-size: 2.5rem; }
+    .panel-desc { font-size: 1.1rem; }
+    .panel-num { font-size: 8rem; bottom: 0; right: 1rem; }
+
+    /* 3D Carousel Mobile Fallback */
+    .carousel-3d-container { 
+        height: auto; perspective: none; overflow: visible; margin-bottom: 3rem; 
+    }
+    .carousel-3d { 
+        position: static; display: flex; 
+        overflow-x: auto; scroll-snap-type: x mandatory; 
+        gap: 1rem; padding-bottom: 1rem; 
+    }
+    .video-item { 
+        position: relative; top: auto; left: auto; margin: 0; 
+        flex-shrink: 0; width: 85vw; height: 150vw; /* Vertical video ratio */
+        scroll-snap-align: center; transform: none !important; 
+    }
+    .carousel-nav, .video-overlay { display: none; } /* Hide desktop controls */
+
+    /* Process Steps Stack */
     .step, .step.reverse { flex-direction: column-reverse; gap: 2rem; margin-bottom: 5rem; }
     .step-content, .step-visual { width: 100%; }
-    .step-visual { height: 200px; }
-    .step h3 { font-size: 1.8rem; }
+    .step-visual { height: 250px; }
+    .step h3 { font-size: 2rem; }
+    
+    /* Text Overlay for Mobile Menu */
+    .menu-link { font-size: 2.5rem; }
 }
