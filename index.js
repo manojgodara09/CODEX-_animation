@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
           scrollTrigger: {
             trigger: ".hero",
             start: "top top",
-            end: "+=4000", 
+            end: "+=2000", 
             scrub: 0.5,        
             pin: true,
           },
@@ -253,4 +253,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         });
     }
+
 });
