@@ -47,23 +47,20 @@ document.addEventListener("DOMContentLoaded", (event) => {
         menuLinks.forEach(link => link.addEventListener('click', closeMenu));
     }
 
-    // 3. HERO TEXT REVEAL
+    // 3. HERO TEXT INITIAL REVEAL
     const tl = gsap.timeline();
-    tl.from(".reveal-text", {
+    tl.from(".step-1 .reveal-text", {
         y: 100, skewY: 7, opacity: 0, filter: "blur(10px)",
         duration: 1.5, stagger: 0.2, ease: "power4.out"
-    })
-    .to(".hero-sub", { opacity: 1, duration: 1, ease: "power2.out" }, "-=1");
+    });
 
     // =========================================
-    // 4. 3D SCROLL SEQUENCE (FIXED QUALITY)
+    // 4. 3D SCROLL SEQUENCE & TEXT TIMELINE
     // =========================================
     const canvas = document.getElementById("hero-lightpass");
     
     if (canvas) {
         const context = canvas.getContext("2d");
-
-        // --- UPDATE THIS TO YOUR EXACT FRAME COUNT ---
         const frameCount = 200; 
         
         const currentFrame = index => (
@@ -73,40 +70,54 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const images = [];
         const sequence = { frame: 0 };
 
-        // Preload
         for (let i = 0; i < frameCount; i++) {
           const img = new Image();
           img.src = currentFrame(i);
           images.push(img);
         }
 
-        gsap.to(sequence, {
+        // CREATE MASTER TIMELINE FOR VIDEO SCRUB + TEXT ANIMATION
+        const heroScrollTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "+=3500", // Extended so text changes don't happen too fast
+                scrub: 0.5,        
+                pin: true,
+            }
+        });
+
+        // Add video scrubbing to timeline
+        heroScrollTl.to(sequence, {
           frame: frameCount - 1,
           snap: "frame",
           ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "+=2000", 
-            scrub: 0.5,        
-            pin: true,
-          },
+          duration: 1, // Normalized duration for the timeline
           onUpdate: render 
-        });
+        }, 0);
+
+        // Add text transition logic to the same timeline
+        heroScrollTl.to(".step-1", { opacity: 0, y: -50, duration: 0.1 }, 0.15) // Step 1 leaves
+                    .fromTo(".step-2", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.1 }, 0.25) // Step 2 enters
+                    .to(".step-2", { opacity: 0, y: -50, duration: 0.1 }, 0.5) // Step 2 leaves
+                    .fromTo(".step-3", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.1 }, 0.6) // Step 3 enters
+                    .to(".step-3", { opacity: 0, filter: "blur(10px)", duration: 0.1 }, 0.85); // All text clears out at the end
 
         images[0].onload = render;
 
         function render() {
-          // FIXED: Clear the canvas based on its actual size
           context.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Quality adjustments for sharper rendering on mobile
+          context.imageSmoothingEnabled = true;
+          context.imageSmoothingQuality = 'high';
+
           const img = images[sequence.frame];
           
           if (img) {
               const hRatio = canvas.width / img.width;
               const vRatio = canvas.height / img.height;
-              
-              // Zoom in 10% to hide logo
-              const ratio = Math.max(hRatio, vRatio) * 1.1; 
+              const ratio = Math.max(hRatio, vRatio) * 1.05; // Slightly reduced zoom 
               
               const centerShift_x = (canvas.width - img.width * ratio) / 2;
               const centerShift_y = (canvas.height - img.height * ratio) / 2;
@@ -115,21 +126,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
           }
         }
 
-        // FIXED: HIGH QUALITY RESIZE (For Mobile/Retina)
         const updateCanvasSize = () => {
-            const dpr = window.devicePixelRatio || 1; // Get phone pixel density
+            const dpr = window.devicePixelRatio || 1;
             canvas.width = window.innerWidth * dpr;
             canvas.height = window.innerHeight * dpr;
-            
-            // Ensure the canvas is scaled back down with CSS
             canvas.style.width = window.innerWidth + "px";
             canvas.style.height = window.innerHeight + "px";
-
-            // Reset scale so drawImage works correctly
             context.scale(1, 1); 
-            // Important: We don't scale context here because we want raw pixels for quality, 
-            // but we rely on the math in render() to fill the new width.
-            
             render();
         };
 
@@ -137,7 +140,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
         window.addEventListener("resize", updateCanvasSize);
     }
 
-    // 5. RESPONSIVE HORIZONTAL SCROLL
+    // =========================================
+    // 5. ANTI-SKIP PIN FOR PORTFOLIO SECTION
+    // =========================================
+    // This briefly pins the feature section so fast scrollers don't fly past it
+    ScrollTrigger.create({
+        trigger: ".portfolio",
+        start: "top top",
+        end: "+=800",
+        pin: true,
+        scrub: true
+    });
+
+    // 6. RESPONSIVE HORIZONTAL SCROLL
     ScrollTrigger.matchMedia({
         "(min-width: 800px)": function() {
             const sections = gsap.utils.toArray(".expertise-panel");
@@ -170,7 +185,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     });
 
-    // 6. MAGNETIC BUTTONS
+    // 7. MAGNETIC BUTTONS
     const magnets = document.querySelectorAll('.magnetic');
     magnets.forEach(magnet => {
         magnet.addEventListener('mousemove', (e) => {
@@ -184,7 +199,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 
-    // 7. CURSOR RING (Optional - Add back if needed)
+    // 8. CURSOR RING
     const cursorRing = document.querySelector('.cursor-ring');
     if(cursorRing) {
         document.addEventListener('mousemove', (e) => {
@@ -193,14 +208,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    // =========================================
-    // 8. FIXED: THE PROCESS ANIMATIONS (RESTORED)
-    // =========================================
+    // 9. THE PROCESS ANIMATIONS
     gsap.to(".box-1", { rotation: 360, duration: 3, repeat: -1, ease: "linear" });
     gsap.to(".box-2", { scale: 1.5, yoyo: true, repeat: -1, duration: 1.5 });
     gsap.to(".box-3", { borderRadius: "50%", yoyo: true, repeat: -1, duration: 2 });
 
-    // 9. 3D CAROUSEL LOGIC
+    // 10. 3D CAROUSEL LOGIC
     const items = document.querySelectorAll('.video-item');
     const totalItems = items.length;
     let currentIndex = 2; 
@@ -253,5 +266,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         });
     }
-
 });
