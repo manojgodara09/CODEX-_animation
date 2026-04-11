@@ -22,137 +22,28 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     } catch (e) { console.error(e); }
 
-    // 2. MENU LOGIC
-    const menuTrigger = document.querySelector('.menu-trigger');
-    const menuClose = document.querySelector('.menu-close-btn');
-    const menuOverlay = document.querySelector('.menu-overlay');
-    const menuLinks = document.querySelectorAll('.menu-link');
 
-    if (menuTrigger && menuOverlay) {
-        const menuTl = gsap.timeline({ paused: true });
-        menuTl.to(menuOverlay, { opacity: 1, duration: 0.4, ease: "power2.out" })
-              .to(menuLinks, { y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: "power4.out" }, "-=0.2");
-
-        menuTrigger.addEventListener('click', () => {
-            menuOverlay.classList.add('active');
-            menuTl.play();
+    // 2. NEW PARALLAX STAR BACKGROUND
+    const layers = document.querySelectorAll('.star-layer');
+    if (layers.length > 0) {
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            layers.forEach(layer => {
+                const speed = parseFloat(layer.getAttribute('data-speed'));
+                const moveX = (x - centerX) * speed;
+                const moveY = (y - centerY) * speed;
+                layer.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
         });
-
-        const closeMenu = () => {
-            menuOverlay.classList.remove('active');
-            menuTl.reverse();
-        };
-
-        menuClose.addEventListener('click', closeMenu);
-        menuLinks.forEach(link => link.addEventListener('click', closeMenu));
     }
 
-    // 3. HERO TEXT INITIAL REVEAL
-    const tl = gsap.timeline();
-    tl.from(".step-1 .reveal-text", {
-        y: 100, skewY: 7, opacity: 0, filter: "blur(10px)",
-        duration: 1.5, stagger: 0.2, ease: "power4.out"
-    });
+    // --- PORTFOLIO PIN HAS BEEN REMOVED HERE ---
 
-    // =========================================
-    // 4. 3D SCROLL SEQUENCE & TEXT TIMELINE
-    // =========================================
-    const canvas = document.getElementById("hero-lightpass");
-    
-    if (canvas) {
-        const context = canvas.getContext("2d");
-        const frameCount = 200; 
-        
-        const currentFrame = index => (
-            `./assets/hero/ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`
-        );
-
-        const images = [];
-        const sequence = { frame: 0 };
-
-        for (let i = 0; i < frameCount; i++) {
-          const img = new Image();
-          img.src = currentFrame(i);
-          images.push(img);
-        }
-
-        // CREATE MASTER TIMELINE FOR VIDEO SCRUB + TEXT ANIMATION
-        const heroScrollTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".hero",
-                start: "top top",
-                end: "+=3500", // Extended so text changes don't happen too fast
-                scrub: 0.5,        
-                pin: true,
-            }
-        });
-
-        // Add video scrubbing to timeline
-        heroScrollTl.to(sequence, {
-          frame: frameCount - 1,
-          snap: "frame",
-          ease: "none",
-          duration: 1, // Normalized duration for the timeline
-          onUpdate: render 
-        }, 0);
-
-        // Add text transition logic to the same timeline
-        heroScrollTl.to(".step-1", { opacity: 0, y: -50, duration: 0.1 }, 0.15) // Step 1 leaves
-                    .fromTo(".step-2", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.1 }, 0.25) // Step 2 enters
-                    .to(".step-2", { opacity: 0, y: -50, duration: 0.1 }, 0.5) // Step 2 leaves
-                    .fromTo(".step-3", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.1 }, 0.6) // Step 3 enters
-                    .to(".step-3", { opacity: 0, filter: "blur(10px)", duration: 0.1 }, 0.85); // All text clears out at the end
-
-        images[0].onload = render;
-
-        function render() {
-          context.clearRect(0, 0, canvas.width, canvas.height);
-          
-          // Quality adjustments for sharper rendering on mobile
-          context.imageSmoothingEnabled = true;
-          context.imageSmoothingQuality = 'high';
-
-          const img = images[sequence.frame];
-          
-          if (img) {
-              const hRatio = canvas.width / img.width;
-              const vRatio = canvas.height / img.height;
-              const ratio = Math.max(hRatio, vRatio) * 1.05; // Slightly reduced zoom 
-              
-              const centerShift_x = (canvas.width - img.width * ratio) / 2;
-              const centerShift_y = (canvas.height - img.height * ratio) / 2;
-              
-              context.drawImage(img, 0, 0, img.width, img.height, centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
-          }
-        }
-
-        const updateCanvasSize = () => {
-            const dpr = window.devicePixelRatio || 1;
-            canvas.width = window.innerWidth * dpr;
-            canvas.height = window.innerHeight * dpr;
-            canvas.style.width = window.innerWidth + "px";
-            canvas.style.height = window.innerHeight + "px";
-            context.scale(1, 1); 
-            render();
-        };
-
-        updateCanvasSize();
-        window.addEventListener("resize", updateCanvasSize);
-    }
-
-    // =========================================
-    // 5. ANTI-SKIP PIN FOR PORTFOLIO SECTION
-    // =========================================
-    // This briefly pins the feature section so fast scrollers don't fly past it
-    ScrollTrigger.create({
-        trigger: ".portfolio",
-        start: "top top",
-        end: "+=800",
-        pin: true,
-        scrub: true
-    });
-
-    // 6. RESPONSIVE HORIZONTAL SCROLL
+    // 3. RESPONSIVE HORIZONTAL SCROLL
     ScrollTrigger.matchMedia({
         "(min-width: 800px)": function() {
             const sections = gsap.utils.toArray(".expertise-panel");
@@ -185,7 +76,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     });
 
-    // 7. MAGNETIC BUTTONS
+    // 4. MAGNETIC BUTTONS
     const magnets = document.querySelectorAll('.magnetic');
     magnets.forEach(magnet => {
         magnet.addEventListener('mousemove', (e) => {
@@ -199,7 +90,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 
-    // 8. CURSOR RING
+    // 5. CURSOR RING
     const cursorRing = document.querySelector('.cursor-ring');
     if(cursorRing) {
         document.addEventListener('mousemove', (e) => {
@@ -208,12 +99,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    // 9. THE PROCESS ANIMATIONS
+    // 6. THE PROCESS ANIMATIONS
     gsap.to(".box-1", { rotation: 360, duration: 3, repeat: -1, ease: "linear" });
     gsap.to(".box-2", { scale: 1.5, yoyo: true, repeat: -1, duration: 1.5 });
     gsap.to(".box-3", { borderRadius: "50%", yoyo: true, repeat: -1, duration: 2 });
 
-    // 10. 3D CAROUSEL LOGIC
+    // 7. 3D CAROUSEL LOGIC
     const items = document.querySelectorAll('.video-item');
     const totalItems = items.length;
     let currentIndex = 2; 
@@ -266,4 +157,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         });
     }
-});
+// 8. DYNAMIC NAV HIGHLIGHTING
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = ['work', 'agency', 'services'];
+    
+    sections.forEach(id => {
+        const sectionEl = document.getElementById(id);
+        if (sectionEl) {
+            ScrollTrigger.create({
+                trigger: sectionEl,
+                start: "top center",      // Triggers when the top of the section hits the middle of the screen
+                end: "bottom center",     // Ends when the bottom of the section leaves the middle
+                onToggle: self => {
+                    if (self.isActive) {
+                        navLinks.forEach(link => {
+                            // Reset all links to inactive state
+                            link.classList.remove('text-purple-400', 'border-purple-400');
+                            link.classList.add('text-neutral-400', 'border-transparent', 'hover:text-white');
+                            
+                            // Highlight the matching active link
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.remove('text-neutral-400', 'border-transparent', 'hover:text-white');
+                                link.classList.add('text-purple-400', 'border-purple-400');
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });});
