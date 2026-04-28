@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Projects | Codex Animation</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+        /* Using your exact theme colors */
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#131313",
+                        "primary": "#c799ff",
+                        "secondary": "#4af8e3",
+                        "on-surface-variant": "#adaaaa"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#0e0e0e] text-white selection:bg-primary/30 selection:text-primary overflow-x-hidden">
+
+    <div class="cursor-ring"></div>
+
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="star-layer star-layer-1" data-speed="0.02"></div>
+        <div class="star-layer star-layer-2" data-speed="0.05"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[150px]"></div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 bg-neutral-950/60 backdrop-blur-xl border-b border-white/10">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <a href="index.html" class="text-2xl font-black tracking-tighter text-white uppercase font-headline hover:text-primary transition-colors">CODEX.</a>
+            <a href="index.html#work" class="text-sm font-label uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors flex items-center gap-2">
+                &larr; Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <header class="relative z-10 pt-32 pb-16 flex flex-col items-center text-center px-4">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-low border border-white/10 mb-6 slide-up">
+            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Category</span>
+        </div>
+        <h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tight text-white mb-4 slide-up uppercase">
+            SaaS <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Explainers</span>
+        </h1>
+        <p class="font-body text-lg text-on-surface-variant max-w-2xl slide-up">
+            Transforming complex software interfaces into sleek, high-retention visual stories.
+        </p>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 pb-32">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            
+            <div class="yt-card group relative rounded-3xl overflow-hidden border border-white/10 bg-surface-container-low transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_40px_rgba(199,153,255,0.15)]">
+                <div class="aspect-video w-full relative bg-black">
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/2xkKFPr818I?rel=0&modestbranding=1" title="SaaS Video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-headline text-2xl font-bold text-white">Project Alpha</h3>
+                        <span class="text-xs font-label text-primary border border-primary/30 px-2 py-1 rounded-full">SaaS</span>
+                    </div>
+                    <p class="text-on-surface-variant text-sm font-body">Abstract typography and UI motion design for a FinTech startup.</p>
+                </div>
+            </div>
+
+            <div class="yt-card group relative rounded-3xl overflow-hidden border border-white/10 bg-surface-container-low transition-all duration-500 hover:border-secondary/40 hover:shadow-[0_0_40px_rgba(51,233,213,0.15)]">
+                <div class="aspect-video w-full relative bg-black">
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/snBR9l61Ges?rel=0&modestbranding=1" title="SaaS Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-headline text-2xl font-bold text-white">Web3 Dashboard</h3>
+                        <span class="text-xs font-label text-secondary border border-secondary/30 px-2 py-1 rounded-full">0x100x</span>
+                    </div>
+                    <p class="text-on-surface-variant text-sm font-body">High-energy kinetic typography mixed with dark-mode UI reveals.</p>
+                </div>
+            </div>
+
+            <div class="yt-card group relative rounded-3xl overflow-hidden border border-white/10 bg-surface-container-low transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_40px_rgba(199,153,255,0.15)]">
+                <div class="aspect-video w-full relative bg-black">
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/6t__EG_C1E0?rel=0&modestbranding=1" title="SaaS Video 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-headline text-2xl font-bold text-white">Creator Analytics</h3>
+                        <span class="text-xs font-label text-primary border border-primary/30 px-2 py-1 rounded-full">SaaS</span>
+                    </div>
+                    <p class="text-on-surface-variant text-sm font-body">Fast-paced, high-retention edit showcasing platform features.</p>
+                </div>
+            </div>
+
+            </div>
+    </main>
+
+    <footer class="border-t border-white/10 py-12 text-center relative z-10">
+        <h2 class="font-headline text-3xl font-bold text-white mb-6">Ready to scale?</h2>
+        <a href="index.html#contact" class="inline-block bg-white text-black font-headline font-bold px-8 py-3 rounded-full hover:scale-105 transition-transform duration-300">Start a Project</a>
+    </footer>
+
+    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+    
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Sync Lenis and GSAP (Fixes the stuck dark cards)
+            const lenis = new Lenis({ duration: 1.2, smooth: true });
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+            gsap.ticker.lagSmoothing(0);
+
+            // 2. Hero Entrance Animation
+            gsap.fromTo(".slide-up", 
+                { y: 50, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power4.out", delay: 0.2 }
+            );
+
+            // 3. YouTube Cards Scroll Reveal (Fixed)
+            gsap.fromTo(".yt-card", 
+                { y: 100, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: ".grid",
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "power3.out"
+                }
+            );
+
+            // 4. Parallax Stars
+            const layers = document.querySelectorAll('.star-layer');
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX, y = e.clientY;
+                const centerX = window.innerWidth / 2, centerY = window.innerHeight / 2;
+                layers.forEach(layer => {
+                    const speed = parseFloat(layer.getAttribute('data-speed'));
+                    layer.style.transform = `translate(${(x - centerX) * speed}px, ${(y - centerY) * speed}px)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

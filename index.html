@@ -2,42 +2,24 @@
 <html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Codex Animation | Empowering Brands</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "surface-container-high": "#20201f",
-                        "secondary-fixed-dim": "#33e9d5",
-                        "surface-dim": "#0e0e0e",
-                        "tertiary-dim": "#eb7c8f",
-                        "surface-container-low": "#131313",
-                        "secondary-fixed": "#4af8e3",
-                        "primary-fixed": "#bc87fe",
-                        "surface-container-lowest": "#000000",
-                        "outline-variant": "#484847",
-                        "surface-container": "#1a1a1a",
-                        "secondary-dim": "#33e9d5",
-                        "surface-bright": "#2c2c2c",
-                        "surface-variant": "#262626",
-                        "surface": "#0e0e0e",
-                        "primary-dim": "#ba85fb",
-                        "tertiary": "#ff9dac",
-                        "on-surface-variant": "#adaaaa",
-                        "on-surface": "#ffffff",
-                        "background": "#0e0e0e",
                         "primary": "#c799ff",
-                        "secondary": "#4af8e3"
+                        "secondary": "#4af8e3",
+                        "background": "#050505",
+                        "surface": "#111111"
                     },
                     fontFamily: {
                         "headline": ["Plus Jakarta Sans", "sans-serif"],
@@ -48,158 +30,331 @@
             }
         }
     </script>
-
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-background text-on-surface selection:bg-primary/30 selection:text-primary">
+<body class="bg-background text-white selection:bg-primary/30 selection:text-primary overflow-hidden">
 
-    <div class="cursor-ring"></div>
-
-    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden" id="parallax-container">
-        <div class="absolute inset-0 bg-[#0e0e0e]"></div>
-        <div class="star-layer star-layer-1" data-speed="0.02"></div>
-        <div class="star-layer star-layer-2" data-speed="0.05"></div>
-        <div class="star-layer star-layer-3" data-speed="0.1"></div>
-        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/10 rounded-full blur-[120px]"></div>
+    <div id="preloader" class="fixed inset-0 z-[100] bg-background flex flex-col items-center justify-center">
+        <div class="overflow-hidden">
+            <h1 class="font-headline text-5xl md:text-7xl font-black text-white uppercase tracking-tighter" id="loader-text">CODEX.</h1>
+        </div>
+        <div class="w-48 h-[2px] bg-white/10 mt-6 relative overflow-hidden">
+            <div id="loader-bar" class="absolute top-0 left-0 h-full bg-primary w-0"></div>
+        </div>
+        <div id="loader-counter" class="mt-4 font-label text-sm text-primary tracking-widest">000</div>
     </div>
 
-    <nav class="fixed top-0 w-full z-50 bg-neutral-950/60 backdrop-blur-xl border-b border-white/10 shadow-[0_0_40px_rgba(199,153,255,0.12)]">
-        <div class="flex justify-between items-center px-8 py-4 max-w-full">
-            <div class="text-2xl font-black tracking-tighter text-white uppercase font-headline">CODEX</div>
+    <div class="cursor-ring hidden md:block"></div>
+
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="star-layer star-layer-1" data-speed="0.02"></div>
+        <div class="star-layer star-layer-2" data-speed="0.05"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[150px]"></div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/5 transition-transform duration-300" id="navbar">
+        <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+            <a href="#" class="flex items-center gap-3 magnetic">
+                <img src="assets/logo.webp" alt="Codex Logo" class="h-10 w-10 object-contain rounded-md">
+                <span class="text-xl font-black tracking-tighter text-white uppercase font-headline hidden md:block">CODEX.</span>
+            </a>
             <div class="hidden md:flex items-center gap-8">
-    <a class="nav-link font-['Plus_Jakarta_Sans'] font-bold tracking-tight pb-1 transition-all duration-300 text-purple-400 border-b-2 border-purple-400" href="#work">Work</a>
-    <a class="nav-link font-['Plus_Jakarta_Sans'] font-bold tracking-tight pb-1 transition-all duration-300 text-neutral-400 border-b-2 border-transparent hover:text-white" href="#agency">Agency</a>
-    <a class="nav-link font-['Plus_Jakarta_Sans'] font-bold tracking-tight pb-1 transition-all duration-300 text-neutral-400 border-b-2 border-transparent hover:text-white" href="#services">Services</a>
-</div>
-            <a href="#contact" class="bg-primary text-[#440080] font-headline font-bold px-6 py-2 rounded-full hover:bg-purple-300 transition-all duration-300 scale-95 active:scale-90 inline-block text-center decoration-none">
-                Book a call
+                <a class="nav-link font-headline font-bold text-sm tracking-widest uppercase hover:text-primary transition-colors" href="#work">Work</a>
+                <a class="nav-link font-headline font-bold text-sm tracking-widest uppercase hover:text-primary transition-colors" href="#agency">Agency</a>
+                <a class="nav-link font-headline font-bold text-sm tracking-widest uppercase hover:text-primary transition-colors" href="#services">Process</a>
+            </div>
+            <a href="#contact" class="magnetic bg-white text-black font-headline font-bold px-6 py-2.5 rounded-full hover:scale-105 transition-transform text-sm uppercase tracking-wider">
+                Let's Build
             </a>
         </div>
     </nav>
 
-    <main class="relative min-h-[90vh] pt-32 pb-16 overflow-hidden z-10 flex items-center justify-center">
-        <section class="relative z-10 max-w-7xl mx-auto px-8 flex flex-col items-center text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/20 mb-10">
+    <main class="relative z-10 pt-40 pb-16 px-4 flex flex-col items-center justify-center">
+        <div class="text-center max-w-5xl mx-auto gs-reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-white/10 mb-6">
                 <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-                <span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Defining the visual future</span>
+                <span class="font-label text-[10px] uppercase tracking-[0.2em] text-gray-400">The Architect of Attention</span>
             </div>
-            <h1 class="font-headline text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-10 max-w-5xl leading-[1.1] uppercase">
-                Empowering brands through <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-dim to-secondary">motion</span>
+            <h1 class="font-headline text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white mb-6 uppercase leading-[0.9]">
+                Engineer <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Visual Hooks.</span>
             </h1>
-            <p class="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl mb-8 leading-relaxed opacity-80">
-                Crafting high-fidelity visual languages for brands that want to stand out in a saturated digital landscape. We bridge the gap between static design and kinetic storytelling.
+            <p class="font-body text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                In a saturated digital ecosystem, average visuals are ignored. We craft high-retention 0x100x motion design and complex SaaS visualizations built specifically to dominate feeds and scale revenue.
             </p>
-        </section>
+        </div>
     </main>
 
-    <section id="work" class="portfolio relative z-10">
-        <h2 class="section-header">FEATURED WORK</h2>
-        
-        <div class="carousel-3d-container">
-            <div class="carousel-nav prev" onclick="moveCarousel(-1)">&#10094;</div>
-            <div class="carousel-nav next" onclick="moveCarousel(1)">&#10095;</div>
-            
-            <div class="carousel-3d">
-                <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/snBR9l61Ges?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
-                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
-                </div>
-                <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/2xkKFPr818I?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
-                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
-                </div>
-                <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/6t__EG_C1E0?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
-                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
-                </div>
-                <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/wPvd2dAmD6A?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
-                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
-                </div>
-                <div class="video-item">
-                    <iframe src="https://www.youtube.com/embed/1tyunD-HOuQ?enablejsapi=1&controls=0&rel=0&autoplay=1&mute=1&vq=hd1080" 
-                        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    <div class="video-overlay"><div class="play-icon">&#9658;</div></div>
+    <section class="relative z-10 w-full max-w-5xl mx-auto px-4 pb-20 gs-reveal">
+        <div class="w-full relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(199,153,255,0.1)] group cursor-pointer" id="video-wrapper">
+            <video id="main-video" class="w-full aspect-video object-cover" playsinline preload="metadata" loop>
+                <source src="assets/intro.mp4" type="video/mp4">
+            </video>
+            <div id="play-btn" class="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all duration-300 group-hover:bg-black/20">
+                <div class="w-20 h-20 bg-primary/20 border border-primary rounded-full flex items-center justify-center backdrop-blur-md transition-transform duration-300 group-hover:scale-110">
+                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="agency" class="scroll-container relative z-10">
-        <section class="expertise-wrapper">
-            <div class="expertise-panel">
-                <h2 class="panel-title">THE AGENCY</h2>
-                <p class="panel-desc">Codex Animation is focused on crafting high-impact videos that simplify complexity, educate audiences, and elevate your brand.</p>
-                <div class="panel-num">00</div>
+    <section class="relative z-10 w-full overflow-hidden py-12 border-y border-white/5 bg-surface/30 backdrop-blur-sm gs-reveal">
+        <p class="text-center text-gray-500 font-label text-xs uppercase tracking-[0.3em] mb-10">Trusted by Web3 & SaaS Innovators</p>
+        <div class="w-full relative">
+            <div class="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
+            
+            <div class="logo-marquee-track flex items-center gap-20 md:gap-32 px-10">
+                <div class="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 22 22 22"></polygon></svg><span class="font-headline font-bold text-xl uppercase tracking-widest">Aura</span></div>
+                <div class="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line></svg><span class="font-headline font-bold text-xl uppercase tracking-widest">Nexus</span></div>
+                <div class="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><span class="font-headline font-bold text-xl uppercase tracking-widest">Vertex</span></div>
+                <div class="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span class="font-headline font-bold text-xl uppercase tracking-widest">Omni</span></div>
+                <div class="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg><span class="font-headline font-bold text-xl uppercase tracking-widest">Flux</span></div>
             </div>
-            <div class="expertise-panel">
-                <h2 class="panel-title">STRATEGY</h2>
-                <p class="panel-desc">We define a creative direction aligned with your brand. We don't just execute; we take the creative lead.</p>
-                <div class="panel-num">01</div>
+        </div>
+    </section>
+
+    <section id="agency" class="relative z-10 max-w-7xl mx-auto px-4 py-32 border-b border-white/5">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center gs-reveal">
+            <div>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-white/10 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    <span class="font-label text-[10px] uppercase tracking-[0.2em] text-gray-400">About Us</span>
+                </div>
+                <h2 class="font-headline text-4xl md:text-5xl font-bold text-white uppercase tracking-tight mb-8">
+                    The Codex <br><span class="text-primary">Standard.</span>
+                </h2>
+                <div class="space-y-6 font-body text-gray-400 text-lg leading-relaxed">
+                    <p>
+                        Codex Animation isn't a traditional editing firm. Operating with rigorous discipline, our foundation is built on the intersection of technical precision and creative audacity. We don't just "cut footage"—we calculate pacing, rhythm, and visual ecosystems.
+                    </p>
+                    <p>
+                        Specializing deeply in the <strong>Crypto, AI, and SaaS</strong> sectors, we understand that complex mechanics require flawless execution to capture attention. Whether it's a token launch, an MEV strategy visualization, or a high-end software explainer, we deliver motion design that translates complexity into conversion.
+                    </p>
+                </div>
+                <div class="mt-10 flex gap-6">
+                    <div class="border-l-2 border-primary pl-4">
+                        <h4 class="font-headline text-2xl font-bold text-white">100+</h4>
+                        <p class="font-label text-xs uppercase tracking-widest text-gray-500 mt-1">Projects Delivered</p>
+                    </div>
+                    <div class="border-l-2 border-secondary pl-4">
+                        <h4 class="font-headline text-2xl font-bold text-white">45%</h4>
+                        <p class="font-label text-xs uppercase tracking-widest text-gray-500 mt-1">Avg Retention Lift</p>
+                    </div>
+                </div>
             </div>
-            <div class="expertise-panel">
-                <h2 class="panel-title">MOTION</h2>
-                <p class="panel-desc">Smooth transitions, dynamic motion, and visuals specifically tailored to your brand.</p>
-                <div class="panel-num">02</div>
+            
+            <div class="relative w-full aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden bg-surface border border-white/10 group">
+                <div class="absolute inset-0 bg-[url('IMG_20250906_175044_077.webp')] bg-cover bg-center opacity-40 mix-blend-luminosity group-hover:mix-blend-normal group-hover:opacity-60 transition-all duration-700"></div>
+                <div class="absolute inset-0 bg-gradient-to-tr from-background via-transparent to-transparent"></div>
+                <div class="absolute bottom-8 left-8">
+                    <p class="font-label text-sm uppercase tracking-widest text-primary mb-1">Precision Engineering</p>
+                    <h3 class="font-headline text-2xl font-bold text-white uppercase">Designed to Convert</h3>
+                </div>
             </div>
-            <div class="expertise-panel">
-                <h2 class="panel-title">OPTIMIZATION</h2>
-                <p class="panel-desc">Final assets ready for distribution. Designed short-form videos optimized for social media.</p>
-                <div class="panel-num">03</div>
+        </div>
+    </section>
+
+    <section id="work" class="relative z-10 max-w-7xl mx-auto px-4 py-32">
+        <div class="text-center mb-16 gs-reveal">
+            <h2 class="font-headline text-4xl md:text-6xl font-bold text-white uppercase mb-4">Selected <span class="text-primary">Categories</span></h2>
+            <p class="font-body text-gray-400 text-lg max-w-2xl mx-auto">Explore our specialized motion libraries tailored for specific industry needs.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <a href="saas.html" class="interactive-card group relative rounded-3xl overflow-hidden bg-surface border border-white/5 aspect-[4/3] block gs-reveal">
+                <video class="absolute inset-0 w-full h-full object-cover opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-80" autoplay muted loop playsinline src="assets/saas.mp4"></video>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/40 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-8 md:p-10 flex flex-col justify-end">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="font-label text-primary text-sm tracking-[0.2em] uppercase mb-2">+45% Conversion</p>
+                            <h3 class="font-headline text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">SaaS UI</h3>
+                        </div>
+                        <div class="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md group-hover:bg-primary group-hover:border-primary transition-colors">
+                            <span class="text-white transform -rotate-45 group-hover:rotate-0 transition-transform text-xl">&rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="0x100x.html" class="interactive-card group relative rounded-3xl overflow-hidden bg-surface border border-white/5 aspect-[4/3] block gs-reveal">
+                <video class="absolute inset-0 w-full h-full object-cover opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-80" autoplay muted loop playsinline src="assets/0x100x.mp4"></video>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/40 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-8 md:p-10 flex flex-col justify-end">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="font-label text-secondary text-sm tracking-[0.2em] uppercase mb-2">High Energy</p>
+                            <h3 class="font-headline text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">0x100x</h3>
+                        </div>
+                        <div class="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md group-hover:bg-secondary group-hover:border-secondary transition-colors">
+                            <span class="text-black transform -rotate-45 group-hover:rotate-0 transition-transform text-xl">&rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="talking-head.html" class="interactive-card group relative rounded-3xl overflow-hidden bg-surface border border-white/5 aspect-[4/3] block gs-reveal">
+                <video class="absolute inset-0 w-full h-full object-cover opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-80" autoplay muted loop playsinline src="assets/talking.mp4"></video>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/40 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-8 md:p-10 flex flex-col justify-end">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="font-label text-primary text-sm tracking-[0.2em] uppercase mb-2">+45% Conversion</p>
+                            <h3 class="font-headline text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">SaaS UI</h3>
+                        </div>
+                        <div class="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md group-hover:bg-primary group-hover:border-primary transition-colors">
+                            <span class="text-white transform -rotate-45 group-hover:rotate-0 transition-transform text-xl">&rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="motion.html" class="interactive-card group relative rounded-3xl overflow-hidden bg-surface border border-white/5 aspect-[4/3] block gs-reveal">
+                <video class="absolute inset-0 w-full h-full object-cover opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-80" autoplay muted loop playsinline src="assets/motion.MP4"></video>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/40 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-8 md:p-10 flex flex-col justify-end">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="font-label text-secondary text-sm tracking-[0.2em] uppercase mb-2">High Energy</p>
+                            <h3 class="font-headline text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">0x100x</h3>
+                        </div>
+                        <div class="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md group-hover:bg-secondary group-hover:border-secondary transition-colors">
+                            <span class="text-black transform -rotate-45 group-hover:rotate-0 transition-transform text-xl">&rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="services" class="relative z-10 max-w-5xl mx-auto px-4 py-24">
+        <div class="text-left md:text-center mb-16 gs-reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-white/10 mb-6 md:mx-auto">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span class="font-label text-[10px] uppercase tracking-[0.2em] text-gray-400">Our Methodology</span>
             </div>
-        </section>
+            <h2 class="font-headline text-4xl md:text-6xl font-bold text-white uppercase tracking-tight">The <span class="text-primary">Architecture.</span></h2>
+            <p class="font-body text-gray-400 mt-4 text-lg max-w-2xl md:mx-auto">A calculated, precise, and deliberately structured workflow designed to turn complex software into high-converting visual assets.</p>
+        </div>
+
+        <div class="accordion-container gs-reveal">
+            <div class="accordion-item border-t border-white/10 py-8 cursor-pointer group">
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-headline text-2xl md:text-4xl font-bold text-white/50 group-hover:text-white transition-colors tracking-tight"><span class="text-primary text-sm align-top mr-4 font-label">01</span> Concept & Strategy</h3>
+                    <div class="icon text-white/50 group-hover:text-white text-3xl font-light transition-transform duration-300">+</div>
+                </div>
+                <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 px-2 md:pl-12">
+                        <p class="font-body text-gray-400 text-lg leading-relaxed">
+                            We don't just execute; we take the creative lead. Before a single frame is rendered, we architect a narrative designed specifically for your target demographic, ensuring maximum retention in the critical first 3 seconds.
+                        </p>
+                        <div class="bg-surface rounded-xl p-6 border border-white/5">
+                            <h4 class="font-label text-white uppercase tracking-widest text-xs mb-4">Deliverables</h4>
+                            <ul class="space-y-3 font-body text-gray-400 text-sm">
+                                <li class="flex items-center gap-3"><span class="text-primary">✦</span> Hook Engineering & Scriptwriting</li>
+                                <li class="flex items-center gap-3"><span class="text-primary">✦</span> Visual Storyboard Wireframing</li>
+                                <li class="flex items-center gap-3"><span class="text-primary">✦</span> Pacing & Audio Strategy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item border-t border-white/10 py-8 cursor-pointer group">
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-headline text-2xl md:text-4xl font-bold text-white/50 group-hover:text-white transition-colors tracking-tight"><span class="text-secondary text-sm align-top mr-4 font-label">02</span> Design & Structure</h3>
+                    <div class="icon text-white/50 group-hover:text-white text-3xl font-light transition-transform duration-300">+</div>
+                </div>
+                <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 px-2 md:pl-12">
+                        <p class="font-body text-gray-400 text-lg leading-relaxed">
+                            Structuring the visual hierarchy. Complex Web3 mechanics, overwhelming SaaS dashboards, and abstract concepts are simplified into sleek, digestible, and striking visual assets that match your brand guidelines perfectly.
+                        </p>
+                        <div class="bg-surface rounded-xl p-6 border border-white/5">
+                            <h4 class="font-label text-white uppercase tracking-widest text-xs mb-4">Deliverables</h4>
+                            <ul class="space-y-3 font-body text-gray-400 text-sm">
+                                <li class="flex items-center gap-3"><span class="text-secondary">✦</span> Custom UI/Dashboard Recreation</li>
+                                <li class="flex items-center gap-3"><span class="text-secondary">✦</span> Typography & Branding Alignment</li>
+                                <li class="flex items-center gap-3"><span class="text-secondary">✦</span> 3D Asset Generation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item border-y border-white/10 py-8 cursor-pointer group">
+                <div class="flex justify-between items-center px-2">
+                    <h3 class="font-headline text-2xl md:text-4xl font-bold text-white/50 group-hover:text-white transition-colors tracking-tight"><span class="text-primary text-sm align-top mr-4 font-label">03</span> Kinetic Animation</h3>
+                    <div class="icon text-white/50 group-hover:text-white text-3xl font-light transition-transform duration-300">+</div>
+                </div>
+                <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 px-2 md:pl-12">
+                        <p class="font-body text-gray-400 text-lg leading-relaxed">
+                            Bringing static assets to life. Utilizing the fast-paced 0x100x aesthetic, we implement rhythmic pacing, aggressive motion blur, and immersive sound design that guarantees the viewer cannot look away.
+                        </p>
+                        <div class="bg-surface rounded-xl p-6 border border-white/5">
+                            <h4 class="font-label text-white uppercase tracking-widest text-xs mb-4">Deliverables</h4>
+                            <ul class="space-y-3 font-body text-gray-400 text-sm">
+                                <li class="flex items-center gap-3"><span class="text-primary">✦</span> High-Retention 0x100x Pacing</li>
+                                <li class="flex items-center gap-3"><span class="text-primary">✦</span> Immersive SFX & Sound Design</li>
+                                <li class="flex items-center gap-3"><span class="text-primary">✦</span> Final Render & Color Polish</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="relative z-10 py-32 bg-surface mt-12 border-t border-white/10">
+        <div class="max-w-3xl mx-auto px-4 text-center gs-reveal">
+            <h2 class="font-headline text-5xl md:text-7xl font-black text-white uppercase mb-4 tracking-tight">Ready to Scale?</h2>
+            <p class="font-body text-gray-400 text-lg mb-12">Submit your project details below to instantly proceed to our calendar.</p>
+            
+            <div class="bg-background p-8 md:p-12 rounded-3xl border border-white/5 shadow-[0_0_40px_rgba(199,153,255,0.05)] text-left relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none"></div>
+
+<form id="booking-form" class="flex flex-col gap-8 relative z-10">
+    <input type="hidden" name="access_key" value="6ca88e65-cdd7-4b95-a4b3-a490c3b1f560">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <input type="text" name="name" placeholder="YOUR NAME" required class="w-full bg-transparent border-b border-white/20 pb-3 text-white font-label uppercase tracking-widest focus:outline-none focus:border-primary transition-colors text-sm">
+        <input type="email" name="email" placeholder="YOUR EMAIL" required class="w-full bg-transparent border-b border-white/20 pb-3 text-white font-label uppercase tracking-widest focus:outline-none focus:border-primary transition-colors text-sm">
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <select name="project_type" required class="w-full bg-transparent border-b border-white/20 pb-3 text-white font-label uppercase tracking-widest focus:outline-none focus:border-primary transition-colors text-sm appearance-none cursor-pointer">
+            <option value="" disabled selected class="bg-background text-gray-500">PROJECT TYPE</option>
+            <option value="SaaS Explainer" class="bg-background text-white">SaaS Explainer</option>
+            <option value="0x100x Promo" class="bg-background text-white">0x100x Promo</option>
+            <option value="Talking Head" class="bg-background text-white">Talking Head Reel</option>
+            <option value="Other" class="bg-background text-white">Other</option>
+        </select>
+
+        <select name="budget" required class="w-full bg-transparent border-b border-white/20 pb-3 text-white font-label uppercase tracking-widest focus:outline-none focus:border-primary transition-colors text-sm appearance-none cursor-pointer">
+            <option value="" disabled selected class="bg-background text-gray-500">ESTIMATED BUDGET</option>
+            <option value="$200 - $500" class="bg-background text-white">$200 - $500</option>
+            <option value="$500 - $1,000" class="bg-background text-white">$500 - $1,000</option>
+            <option value="$1,000 - $2,500" class="bg-background text-white">$1,000 - $2,500</option>
+            <option value="$2,500+" class="bg-background text-white">$2,500+</option>
+        </select>
     </div>
 
-    <section id="services" class="process relative z-10">
-        <h2 class="section-header">THE PROCESS</h2>
-        <div class="step">
-            <div class="step-content">
-                <span class="step-num">PHASE 1</span>
-                <h3>CONCEPT</h3>
-                <p>Defining a creative direction aligned with your brand, audience, and goals.</p>
+    <textarea name="message" placeholder="PROJECT DETAILS / LINKS" rows="3" required class="w-full bg-transparent border-b border-white/20 pb-3 text-white font-label uppercase tracking-widest focus:outline-none focus:border-primary transition-colors resize-none text-sm"></textarea>
+    
+    <div class="flex flex-col sm:flex-row gap-4 mt-4">
+        <button type="submit" id="submit-btn" class="magnetic flex-1 bg-white text-black font-headline font-bold py-4 rounded-full hover:bg-primary hover:text-black transition-colors text-sm uppercase tracking-wider text-center flex items-center justify-center gap-2">
+            Submit & Book Call
+            <span class="text-xl leading-none mb-1">&rarr;</span>
+        </button>
+        
+        <a href="https://cal.com/codex-animation-yzv32g/30min" target="_blank" class="magnetic flex-1 bg-surface border border-white/10 text-white font-headline font-bold py-4 rounded-full hover:border-primary transition-colors text-sm uppercase tracking-wider flex items-center justify-center gap-2 text-center">
+            Skip Form & Book
+        </a>
+    </div>
+</form>
             </div>
-            <div class="step-visual"><div class="visual-box box-1"></div></div>
         </div>
-        <div class="step reverse">
-            <div class="step-content">
-                <span class="step-num">PHASE 2</span>
-                <h3>DESIGN</h3>
-                <p>Creating clear and engaging visuals that structure your message.</p>
-            </div>
-            <div class="step-visual"><div class="visual-box box-2"></div></div>
-        </div>
-        <div class="step">
-            <div class="step-content">
-                <span class="step-num">PHASE 3</span>
-                <h3>ANIMATION</h3>
-                <p>Bringing your ideas to life with smooth transitions and dynamic motion.</p>
-            </div>
-            <div class="step-visual"><div class="visual-box box-3"></div></div>
-        </div>
-    </section>
-
-    <footer id="contact" class="relative z-10">
-        <section class="register-section" style="padding: 8rem 2rem; text-align: center;">
-            <h2 class="section-header">WORK WITH US</h2>
-            <form name="contact" method="POST" data-netlify="true" action="/success.html" class="contact-form" netlify>
-                <input type="hidden" name="form-name" value="contact">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" placeholder="Tell us about your project..." rows="4" required></textarea>
-                </div>
-                <button type="submit" class="cta-btn magnetic" style="margin-top: 2rem;">SEND REQUEST</button>
-            </form>
-        </section>
     </footer>
 
     <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>

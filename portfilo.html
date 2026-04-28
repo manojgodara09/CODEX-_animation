@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahendra | Motion Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific Portfolio Overrides */
+        .profile-hero { 
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; 
+            padding: 0 5vw; background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.15), #050505 60%); 
+        }
+        .intro-role { 
+            font-family: 'Space Grotesk', sans-serif; color: var(--accent-glow); 
+            letter-spacing: 2px; font-weight: 700; font-size: 1rem; margin-bottom: 1rem; text-transform: uppercase; 
+        }
+        .name-title { 
+            font-family: 'Syne', sans-serif; font-size: clamp(4rem, 10vw, 8rem); 
+            font-weight: 800; line-height: 0.95; text-transform: uppercase; margin-bottom: 1.5rem;
+        }
+        .name-title span { display: block; }
+        .name-title span.outline { color: transparent; -webkit-text-stroke: 2px white; }
+        .profile-desc { 
+            max-width: 600px; font-size: 1.2rem; line-height: 1.6; color: #aaa; 
+        }
+        
+        /* The Story Section */
+        .story-section {
+            padding: 8rem 5vw;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .story-header {
+            flex: 1;
+            min-width: 300px;
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+        }
+        .story-content {
+            flex: 1.5;
+            min-width: 300px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #bbb;
+        }
+        .story-content p { margin-bottom: 1.5rem; }
+        .story-content strong { color: white; }
+
+        /* Marquee */
+        .marquee-wrapper { 
+            width: 100%; overflow: hidden; background: var(--accent); 
+            padding: 1.5rem 0; transform: rotate(-2deg) scale(1.05); margin: 2rem 0 6rem 0; 
+        }
+        .marquee { 
+            display: flex; white-space: nowrap; font-family: 'Syne', sans-serif; 
+            font-size: 2rem; font-weight: 800; text-transform: uppercase; color: white; 
+        }
+        
+        /* Video Grid */
+        #selected-works { padding: 0 5vw; }
+        .work-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;
+        }
+        .work-card { 
+            position: relative; border-radius: 15px; overflow: hidden; background: #111; 
+            aspect-ratio: 9/16; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.4s; 
+        }
+        .work-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(124, 58, 237, 0.3); }
+        .work-card iframe { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .card-info { 
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 3rem 1.5rem 1.5rem; 
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .work-card:hover .card-info { transform: translateY(0); }
+        .card-info h4 { font-family: 'Syne', sans-serif; font-size: 1.5rem; color: white; }
+        .card-info p { color: var(--accent-glow); font-size: 0.9rem; margin-top: 5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;}
+    </style>
+</head>
+<body>
+    <div class="cursor-ring"></div>
+
+    <nav>
+        <a href="index.html" style="text-decoration: none; color: white;"><div class="logo">CODEX.</div></a>
+        <a href="index.html#contact" style="text-decoration: none; color: white;"><div class="menu-trigger magnetic">HIRE ME</div></a>
+    </nav>
+
+    <header class="profile-hero">
+        <div class="intro-role slide-up">Video Editor & Motion Designer</div>
+        <h1 class="name-title">
+            <span class="slide-up">MAHENDRA</span>
+            <span class="outline slide-up">CREATIVE.</span>
+        </h1>
+        <p class="profile-desc slide-up">Specializing in high-retention, <strong>0x100x style edits</strong> and scroll-stopping motion graphics. I don't just edit videos; I engineer visual hooks that scale brands and captivate audiences.</p>
+    </header>
+
+    <section class="story-section" id="story">
+        <h2 class="story-header gs-reveal">THE<br><span style="color: var(--accent-glow);">ARCHITECT</span><br>OF ATTENTION.</h2>
+        <div class="story-content">
+            <p class="gs-reveal">Operating out of Jaipur, I lead <strong>Codex Animation</strong>—an agency built on the premise that complex ideas deserve simple, beautiful execution. My foundation in computer science and mathematics deeply informs my approach to motion design; everything is calculated, precise, and deliberately structured.</p>
+            <p class="gs-reveal">I obsess over the details of the <strong>0x100x aesthetic</strong>. It's not just about flashy transitions; it's about pacing, rhythm, and designing visual ecosystems that hold viewer retention from the first frame to the last.</p>
+            <p class="gs-reveal">Whether I'm cutting high-energy creator reels or directing polished SaaS explainers, my goal remains the same: <strong>Empower the brand through motion.</strong></p>
+        </div>
+    </section>
+
+    <div class="marquee-wrapper">
+        <div class="marquee">
+            MOTION DESIGNER &nbsp; // &nbsp; VIDEO EDITOR &nbsp; // &nbsp; 0X100X STYLE EXPERT &nbsp; // &nbsp; VISUAL STORYTELLER &nbsp; // &nbsp; MOTION DESIGNER &nbsp; // &nbsp; VIDEO EDITOR &nbsp; // &nbsp; 0X100X STYLE EXPERT &nbsp; // &nbsp;
+        </div>
+    </div>
+
+    <section id="selected-works">
+        <h2 class="section-header gs-reveal" style="text-align: left;">SELECTED WORKS</h2>
+        <div class="work-grid">
+            <div class="work-card gs-stagger">
+                <iframe src="https://www.youtube.com/embed/snBR9l61Ges?controls=0&rel=0&autoplay=1&mute=1&loop=1" frameborder="0"></iframe>
+                <div class="card-info">
+                    <h4>Crypto Agency Promo</h4>
+                    <p>0x100x Style / 3D Motion</p>
+                </div>
+            </div>
+            <div class="work-card gs-stagger">
+                <iframe src="https://www.youtube.com/embed/2xkKFPr818I?controls=0&rel=0&autoplay=1&mute=1&loop=1" frameborder="0"></iframe>
+                <div class="card-info">
+                    <h4>SaaS Explainer</h4>
+                    <p>Typography / Abstract</p>
+                </div>
+            </div>
+            <div class="work-card gs-stagger">
+                <iframe src="https://www.youtube.com/embed/6t__EG_C1E0?controls=0&rel=0&autoplay=1&mute=1&loop=1" frameborder="0"></iframe>
+                <div class="card-info">
+                    <h4>Creator Reel</h4>
+                    <p>High Retention / Fast Paced</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" style="min-height: 40vh; margin-top: 8rem; display: flex; flex-direction: column; justify-content: center; align-items: center; border-top: 1px solid #222;">
+        <h2 class="section-header gs-reveal" style="margin-bottom: 2rem;">LET'S BUILD.</h2>
+        <a href="mailto:hello@codexanimation.com" class="cta-btn magnetic gs-reveal" style="text-decoration:none; display: inline-block;">EMAIL ME</a>
+    </footer>
+
+    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Smooth Scroll
+            const lenis = new Lenis({ duration: 1.2, smooth: true });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+
+            // 1. Hero Entrance
+            gsap.from(".slide-up", { 
+                y: 100, opacity: 0, duration: 1.2, stagger: 0.15, ease: "power4.out", delay: 0.2 
+            });
+
+            // 2. Marquee Animation
+            gsap.to(".marquee", { 
+                xPercent: -50, ease: "none", duration: 15, repeat: -1 
+            });
+
+            // 3. Scroll Reveal Elements (Story text, headers, buttons)
+            const revealElements = gsap.utils.toArray(".gs-reveal");
+            revealElements.forEach(el => {
+                gsap.from(el, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 50, opacity: 0, duration: 1, ease: "power3.out"
+                });
+            });
+
+            // 4. Staggered Video Grid Reveal
+            ScrollTrigger.batch(".gs-stagger", {
+                start: "top 85%",
+                onEnter: batch => gsap.from(batch, { opacity: 0, y: 100, stagger: 0.15, duration: 1, ease: "power3.out" }),
+                onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: 100, stagger: 0.1, duration: 0.5 })
+            });
+
+            // 5. Cursor & Magnetic buttons
+            const cursorRing = document.querySelector('.cursor-ring');
+            if(window.innerWidth > 768) {
+                document.addEventListener('mousemove', (e) => {
+                    cursorRing.style.left = e.clientX + 'px';
+                    cursorRing.style.top = e.clientY + 'px';
+                });
+
+                const magnets = document.querySelectorAll('.magnetic');
+                magnets.forEach(magnet => {
+                    magnet.addEventListener('mousemove', (e) => {
+                        const rect = magnet.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        gsap.to(magnet, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: "power2.out" });
+                    });
+                    magnet.addEventListener('mouseleave', () => {
+                        gsap.to(magnet, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
